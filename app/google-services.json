@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "905571220614",
+    "project_id": "studypullf16",
+    "storage_bucket": "studypullf16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:905571220614:android:2fa1ee164c84bf150d2507",
+        "android_client_info": {
+          "package_name": "com.example.studypull"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "905571220614-5eu5c3t5p5q2eg6lm5ur8fu3pdr8ggvh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFu-sevm2Viu0JMywG07h9U6fmfu_ILo0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "905571220614-5eu5c3t5p5q2eg6lm5ur8fu3pdr8ggvh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
