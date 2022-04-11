@@ -77,8 +77,17 @@ class UserFragment : Fragment() {
             photoPickerIntent.type = "image/*"
             activity?.startActivityForResult(photoPickerIntent,PICK_PROFILE_FROM_ALBUM)
         }
-
+        getProfileImage()
         return fragmentview
+    }
+    fun getProfileImage(){
+        firestore?.collection("profileImages")?.document(uid!!)?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
+            if (documentSnapshot == null) return@addSnapshotListener
+            if(documentSnapshot.data != null){
+                var url = documentSnapshot?.data!!["image"]//밑의 requireActivity는 activity를 수정하였음
+                Glide.with(requireActivity()).load(url).apply(RequestOptions().circleCrop()).into(fragmentview?.findViewById<ImageView>(R.id.account_iv_profile)!!)
+            }
+        }
     }
     inner class UserFragmentRecyclerViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         var contentDTOs : ArrayList<ContentDTO> = arrayListOf()
