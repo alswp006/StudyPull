@@ -1,5 +1,6 @@
 package com.example.studypull.navigation
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -117,6 +118,11 @@ class DetailViewFragment : Fragment() {
                 bundle.putString("destinationUid",contentDTOs[p1].userId)
                 fragment.arguments = bundle
                 activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_content,fragment)?.commit()
+            }
+            viewholder.findViewById<ImageView>(R.id.detailviewitem_comment_imageview).setOnClickListener { v ->
+                var intent = Intent(v.context,CommentActivity::class.java)
+                intent.putExtra("contentUid",contentUidList[p1])
+                startActivity(intent)
             }
 
         }

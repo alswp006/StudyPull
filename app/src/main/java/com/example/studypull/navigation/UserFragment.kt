@@ -1,6 +1,7 @@
 package com.example.studypull.navigation
 
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
 import androidx.appcompat.widget.LinearLayoutCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +23,7 @@ import com.example.studypull.LoginActivity
 import com.example.studypull.MainActivity
 import com.example.studypull.R
 import com.example.studypull.navigation.model.ContentDTO
+import com.example.studypull.navigation.model.FollowDTO
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -67,6 +70,9 @@ class UserFragment : Fragment() {
             mainActivity?.findViewById<ImageView>(R.id.toolbar_title_image)?.visibility = View.GONE
             mainActivity?.findViewById<TextView>(R.id.toolbar_username)?.visibility = View.VISIBLE
             mainActivity?.findViewById<ImageView>(R.id.toolbar_btn_back)?.visibility = View.VISIBLE
+            fragmentview?.findViewById<AppCompatButton>(R.id.account_btn_follow_signout)?.setOnClickListener {
+                requestFollow()
+            }
         }
         fragmentview?.findViewById<RecyclerView>(R.id.account_recyclerview)?.adapter = UserFragmentRecyclerViewAdapter()
         //임의로 activity -> requireActivity
@@ -78,7 +84,75 @@ class UserFragment : Fragment() {
             activity?.startActivityForResult(photoPickerIntent,PICK_PROFILE_FROM_ALBUM)
         }
         getProfileImage()
+        getFollowerAndFollowing()
         return fragmentview
+    }
+    fun getFollowerAndFollowing(){
+        firestore?.collection("users")?.document(uid!!)?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
+            if(documentSnapshot == null) return@addSnapshotListener
+            var followDTO = documentSnapshot.toObject(FollowDTO::class.java)
+            if(followDTO?.followingCount != null){
+                fragmentview?.findViewById<TextView>(R.id.account_tv_following_count)?.text = followDTO?.followingCount?.toString()
+            }
+            if(followDTO?.followerCount != null){
+                fragmentview?.findViewById<TextView>(R.id.account_tv_follower_count)?.text = followDTO?.followerCount?.toString()
+                if(followDTO?.followers?.containsKey(currentUserUid!!)){
+                    fragmentview?.findViewById<AppCompatButton>(R.id.account_btn_follow_signout)?.text = getString(R.string.follow_cancel)
+                    fragmentview?.findViewById<AppCompatButton>(R.id.account_btn_follow_signout)?.background?.setColorFilter(ContextCompat.getColor(requireActivity(),R.color.colorLightGray),PorterDuff.Mode.MULTIPLY)
+                }else{
+                    if(uid != currentUserUid){
+                        fragmentview?.findViewById<AppCompatButton>(R.id.account_btn_follow_signout)?.text = getString(R.string.follow)
+                        fragmentview?.findViewById<AppCompatButton>(R.id.account_btn_follow_signout)?.background?.colorFilter = null
+                    }
+                }
+            }
+
+        }
+    }
+    fun requestFollow(){
+        var tsDocFollowing = firestore?.collection("users")?.document(currentUserUid!!)
+        firestore?.runTransaction { transition ->
+            var followDTO = transition.get(tsDocFollowing!!).toObject(FollowDTO::class.java)
+            if(followDTO == null){
+                followDTO = FollowDTO()
+                followDTO!!.followingCount = 1
+                followDTO!!.followers[uid!!] = true
+
+                transition.set(tsDocFollowing,followDTO)
+                return@runTransaction
+            }
+
+            if(followDTO.followings.containsKey(uid)){
+                followDTO?.followingCount = followDTO?.followingCount - 1
+                followDTO?.followers?.remove(uid)
+            }else{
+                followDTO?.followingCount = followDTO?.followingCount + 1
+                followDTO?.followers[uid!!] = true
+            }
+            transition.set(tsDocFollowing,followDTO)
+            return@runTransaction
+        }
+        var tsDocFollower = firestore?.collection("users")?.document(uid!!)
+        firestore?.runTransaction { transition ->
+            var followDTO = transition.get(tsDocFollower!!).toObject(FollowDTO::class.java)
+            if(followDTO == null){
+                followDTO = FollowDTO()
+                followDTO!!.followerCount = 1
+                followDTO!!.followers[currentUserUid!!] = true
+
+                transition.set(tsDocFollower,followDTO!!)
+                return@runTransaction
+            }
+            if(followDTO!!.followers.containsKey(currentUserUid)){
+                followDTO!!.followerCount = followDTO!!.followerCount - 1
+                followDTO!!.followers.remove(currentUserUid!!)
+            }else{
+                followDTO!!.followerCount = followDTO!!.followerCount + 1
+                followDTO!!.followers[currentUserUid!!] = true
+            }
+            transition.set(tsDocFollower,followDTO!!)
+            return@runTransaction
+        }
     }
     fun getProfileImage(){
         firestore?.collection("profileImages")?.document(uid!!)?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
