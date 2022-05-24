@@ -25,6 +25,7 @@ import com.example.studypull.R
 import com.example.studypull.navigation.model.AlarmDTO
 import com.example.studypull.navigation.model.ContentDTO
 import com.example.studypull.navigation.model.FollowDTO
+import com.example.studypull.navigation.util.FcmPush
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -164,6 +165,9 @@ class UserFragment : Fragment() {
         alarmDTO.kind = 2
         alarmDTO.timestamp = System.currentTimeMillis()
         FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
+
+        var message = auth?.currentUser?.email + getString(R.string.alarm_follow)
+        FcmPush.instance.sendMessage(destinationUid,"StudyPull",message)
     }
     fun getProfileImage(){
         firestore?.collection("profileImages")?.document(uid!!)?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
