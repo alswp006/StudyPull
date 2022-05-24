@@ -93,7 +93,7 @@ class DetailViewFragment : Fragment() {
 
             //ProfileImage
             Glide.with(p0.itemView.context).load(contentDTOs!![p1].imageUri)
-                .into(viewholder.findViewById<ImageView>(R.id.detailviewitem_profile_image))
+                .circleCrop().into(viewholder.findViewById<ImageView>(R.id.detailviewitem_profile_image))
 
             //This code is when button is clicked
             viewholder.findViewById<ImageView>(R.id.detailviewitem_favorite_imageview)
