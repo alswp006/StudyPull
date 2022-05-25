@@ -36,7 +36,7 @@
                 android:hint="아이디"
                 android:inputType="textEmailAddress"
                 android:textAllCaps="false"
-                android:textColor="#FFFFFF"
+                android:textColor="#000000"
                 android:textSize="24sp"
                 android:textStyle="bold" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -82,7 +82,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/btn_signin_facebook2"
+            android:background="@drawable/btn_signin_facebook3"
             android:fontFamily="@font/mugonghwa"
             android:text="페이스북 로그인"
             android:textAlignment="center"

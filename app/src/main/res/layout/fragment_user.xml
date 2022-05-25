@@ -14,76 +14,93 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/ic_account" />
+            android:src="@drawable/ic_first" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/account_btn_follow_signout"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_width="270dp"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_toRightOf="@+id/account_iv_profile"
-            android:text="@string/follow" />
+            android:background="@drawable/btn_corner"
+            android:backgroundTint="#90CAF9"
+            android:text="팔로우"
+            android:textColor="#FFFFFF" />
+
 
         <LinearLayout
-            android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/account_btn_follow_signout"
-            android:layout_toRightOf="@id/account_iv_profile">
+            android:layout_toRightOf="@id/account_iv_profile"
+            android:gravity="center">
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/post" />
+                    android:text="게시물"
+                    android:textColor="#000000" />
 
                 <TextView
                     android:id="@+id/account_tv_post_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/count_0" />
+                    android:text="@string/count_0"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/follower" />
+                    android:text="팔로워"
+                    android:textColor="#000000" />
 
                 <TextView
                     android:id="@+id/account_tv_follower_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/count_0" />
+                    android:text="0"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/following" />
+                    android:text="팔로잉"
+                    android:textColor="#000000" />
 
                 <TextView
                     android:id="@+id/account_tv_following_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/count_0" />
+                    android:text="@string/count_0"
+                    android:textColor="#000000"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </RelativeLayout>
@@ -91,4 +108,5 @@
         android:id="@+id/account_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+
 </LinearLayout>

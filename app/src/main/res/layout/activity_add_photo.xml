@@ -10,12 +10,12 @@
     <Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="35dp">
+        android:layout_height="40dp">
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/studyfull_textlogo" />
+            android:layout_height="30dp"
+            android:src="@drawable/studypool_toollogo" />
     </Toolbar>
     <LinearLayout
         android:layout_width="match_parent"
