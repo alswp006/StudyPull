@@ -2,6 +2,7 @@ package com.example.studypull.navigation
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -162,6 +163,7 @@ class DetailViewFragment : Fragment() {
 
             var message = FirebaseAuth.getInstance()?.currentUser?.email + getString(R.string.alarm_favorite)
             FcmPush.instance.sendMessage(destinationUid,"StudyPull",message)
+
         }
     }
 }
