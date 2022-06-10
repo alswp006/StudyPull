@@ -2,6 +2,7 @@ package com.example.studypull.navigation
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.studypull.R
+import com.example.studypull.navigation.model.AlarmDTO
 import com.example.studypull.navigation.model.ContentDTO
+import com.example.studypull.navigation.util.FcmPush
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.QuerySnapshot
@@ -92,7 +95,7 @@ class DetailViewFragment : Fragment() {
 
             //ProfileImage
             Glide.with(p0.itemView.context).load(contentDTOs!![p1].imageUri)
-                .into(viewholder.findViewById<ImageView>(R.id.detailviewitem_profile_image))
+                .circleCrop().into(viewholder.findViewById<ImageView>(R.id.detailviewitem_profile_image))
 
             //This code is when button is clicked
             viewholder.findViewById<ImageView>(R.id.detailviewitem_favorite_imageview)
@@ -122,6 +125,7 @@ class DetailViewFragment : Fragment() {
             viewholder.findViewById<ImageView>(R.id.detailviewitem_comment_imageview).setOnClickListener { v ->
                 var intent = Intent(v.context,CommentActivity::class.java)
                 intent.putExtra("contentUid",contentUidList[p1])
+                intent.putExtra("destinationUid",contentDTOs[p1].uid)
                 startActivity(intent)
             }
 
@@ -142,9 +146,24 @@ class DetailViewFragment : Fragment() {
                     //When the button is not clicked
                     contentDTO?.favoriteCount = contentDTO?.favoriteCount + 1
                     contentDTO?.favorites[uid!!] = true
+                    favoriteAlarm(contentDTOs[position].uid!!)
                 }
                 transition.set(tsDoc, contentDTO)
             }
+        }
+
+        fun favoriteAlarm(destinationUid : String){
+            var alarmDTO = AlarmDTO()
+            alarmDTO.destinationUid = destinationUid
+            alarmDTO.userId = FirebaseAuth.getInstance().currentUser?.email
+            alarmDTO.uid = FirebaseAuth.getInstance().currentUser?.uid
+            alarmDTO.kind = 0
+            alarmDTO.timestamp = System.currentTimeMillis()
+            FirebaseFirestore.getInstance().collection("alarms").document().set(alarmDTO)
+
+            var message = FirebaseAuth.getInstance()?.currentUser?.email + getString(R.string.alarm_favorite)
+            FcmPush.instance.sendMessage(destinationUid,"StudyPull",message)
+
         }
     }
 }
