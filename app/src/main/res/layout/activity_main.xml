@@ -4,12 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:backgroundTint="#FFFFFF"
     tools:context=".MainActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="35dp">
+        android:layout_height="50dp"
+        android:background="#FFFFFF">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -17,11 +20,11 @@
 
             <ImageView
                 android:id="@+id/toolbar_btn_back"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
+                android:layout_width="30dp"
+                android:layout_height="45dp"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="22dp"
-                android:src="@drawable/ic_arrow_back" />
+                android:layout_marginLeft="0dp"
+                android:src="@drawable/ic_arrwo_back" />
 
             <TextView
                 android:id="@+id/toolbar_username"
@@ -35,9 +38,22 @@
 
             <ImageView
                 android:id="@+id/toolbar_title_image"
-                android:layout_width="match_parent"
+                android:layout_width="160dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/studyfull_textlogo" />
+                android:layout_marginLeft="0dp"
+                android:background="#FFFFFF"
+                android:src="@drawable/studypool_toollogo" />
+
+            <Button
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="0dp"
+                android:backgroundTint="#00FFFFFF"
+                android:drawableBottom="@drawable/cheatlist_icon" />
+
+
         </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
@@ -70,6 +86,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        app:itemIconTint="@color/black"
         app:menu="@menu/bottom_navigation_main">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
