@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -35,6 +36,12 @@
             android:layout_margin="20dp"
             android:padding="10dp"
             android:id="@+id/commentviewitem_textview_comment"/>
+        <ImageView
+            android:id="@+id/commentviewitem_imageview_content"
+            android:scaleType="fitXY"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

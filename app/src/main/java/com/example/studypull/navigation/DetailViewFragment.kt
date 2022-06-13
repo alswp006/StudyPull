@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.studypull.R
 import com.example.studypull.navigation.model.AlarmDTO
 import com.example.studypull.navigation.model.ContentDTO
@@ -24,6 +25,7 @@ import com.google.firebase.firestore.Transaction
 class DetailViewFragment : Fragment() {
     var firestore: FirebaseFirestore? = null
     var uid: String? = null
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -94,8 +96,14 @@ class DetailViewFragment : Fragment() {
                 "Likes " + contentDTOs!![p1].favoriteCount
 
             //ProfileImage
-            Glide.with(p0.itemView.context).load(contentDTOs!![p1].imageUri)
-                .circleCrop().into(viewholder.findViewById<ImageView>(R.id.detailviewitem_profile_image))
+            firestore?.collection("profileImages")?.document(uid!!)?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
+                if(documentSnapshot == null) return@addSnapshotListener
+                if(documentSnapshot.data != null) {
+
+                    var url = documentSnapshot?.data!!["image"]
+                    Glide.with(activity!!).load(url).apply(RequestOptions().circleCrop()).into(viewholder.findViewById<ImageView>(R.id.detailviewitem_profile_image))
+                }
+            }
 
             //This code is when button is clicked
             viewholder.findViewById<ImageView>(R.id.detailviewitem_favorite_imageview)
