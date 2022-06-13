@@ -51,6 +51,21 @@
         android:textColor="#FFFFFF"
         android:textStyle="bold" />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/comment_btn_setimage"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/comment_recyclerview"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/btn_corner"
+        android:backgroundTint="#B7DEFF"
+        android:text="사진"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
     <EditText
         android:id="@+id/comment_edit_message"
         android:layout_width="match_parent"
@@ -62,6 +77,7 @@
         android:layout_marginRight="15dp"
         android:layout_marginBottom="10dp"
         android:layout_toLeftOf="@id/comment_btn_send"
+        android:layout_toRightOf="@id/comment_btn_setimage"
         android:background="@drawable/btn_corner"
         android:backgroundTint="@color/colorLightGray"
         android:hint="  댓글 달기..."
