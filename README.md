@@ -13,7 +13,8 @@ https://developer.android.com/guide/topics/ui/layout/recyclerview?hl=ko
 https://stackoverflow.com/questions/61610024/how-to-upload-an-image-to-firebase-storage-using-kotlin-in-android-q 참고
 ### 후에 코루틴 방식으로 변경
 https://developer.android.com/kotlin/coroutines?hl=ko
-'''fun contentUpload(): Task<Uri> {
+'''
+fun contentUpload(): Task<Uri> {
         //make filename
 
         var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
@@ -49,4 +50,5 @@ https://developer.android.com/kotlin/coroutines?hl=ko
             }?.await()
         }
         return storageRef!!.downloadUrl
-    }'''
+    }
+        '''
