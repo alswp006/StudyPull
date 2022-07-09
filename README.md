@@ -16,7 +16,6 @@ https://developer.android.com/kotlin/coroutines?hl=ko
 
 '''
 fun contentUpload(): Task<Uri> {
-        //make filename
 
         var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         var imageFileName = "Image_" + timestamp + "_.png"
