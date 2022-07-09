@@ -95,35 +95,5 @@ class AddCommentPhotoActivity : AppCompatActivity() {
         }
     }
 
-    /*/Callback method
-    storageRef?.putFile(photoUri!!)?.addOnCanceledListener {
-        storageRef.downloadUrl.addOnSuccessListener { uri ->
-            var contentDTO = ContentDTO()
-
-            //Insert downloadUri of image
-            contentDTO.imageUri = uri.toString()
-
-            //Insert uid of user
-            contentDTO.uid = auth?.currentUser?.uid
-
-            //Insert userId
-            contentDTO.userId = auth?.currentUser?.email
-
-            //Insert explain of content
-            contentDTO.explain = findViewById<EditText>(R.id.addphoto_edit_explain).text.toString()
-
-            //Insert timestamp
-            contentDTO.timestamp = System.currentTimeMillis()
-
-            firestore?.collection("images")?.document()?.set(contentDTO)
-
-            setResult(Activity.RESULT_OK)
-
-            finish()
-        }
-    }
-
-}*/
-
 
 }

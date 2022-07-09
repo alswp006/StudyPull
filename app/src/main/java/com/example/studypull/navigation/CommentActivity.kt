@@ -56,6 +56,7 @@ class CommentActivity : AppCompatActivity() {
             comment.uid = FirebaseAuth.getInstance().currentUser?.uid
             comment.comment = findViewById<EditText>(R.id.comment_edit_message).text.toString()
             comment.timestamp = System.currentTimeMillis()
+            // url 초기화 해서 넘겨주기
 
             FirebaseFirestore.getInstance().collection("images").document(contentUid!!)
                 .collection("comments").document().set(comment)
@@ -84,7 +85,7 @@ class CommentActivity : AppCompatActivity() {
     }
 
     inner class CommentRecyclerviewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+        var contentDTOs: ArrayList<ContentDTO.Comment> = arrayListOf()
         var comments: ArrayList<ContentDTO.Comment> = arrayListOf()
 
         init {
@@ -121,6 +122,9 @@ class CommentActivity : AppCompatActivity() {
                 comments[p1].comment
             view.findViewById<TextView>(R.id.commentviewitem_textview_profile).text =
                 comments[p1].userId
+            contentDTOs!![p1].imageUri = comments[p1].imageUri
+
+            //올린 파일의 url 받아오기
 
             FirebaseFirestore.getInstance()
                 .collection("profileImages")

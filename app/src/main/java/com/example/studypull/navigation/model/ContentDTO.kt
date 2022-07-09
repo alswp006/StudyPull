@@ -1,6 +1,6 @@
 package com.example.studypull.navigation.model
 
-class ContentDTO(
+data class ContentDTO(
     var explain: String? = null,
     var imageUri: String? = null,
     var uid: String? = null,
