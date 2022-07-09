@@ -14,7 +14,7 @@ https://stackoverflow.com/questions/61610024/how-to-upload-an-image-to-firebase-
 ### 후에 코루틴 방식으로 변경
 https://developer.android.com/kotlin/coroutines?hl=ko
 
-'''
+//'''
 fun contentUpload(): Task<Uri> {
 
         var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
