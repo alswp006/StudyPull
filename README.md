@@ -11,6 +11,43 @@ https://firebase.google.com/docs/auth/android/google-signin?hl=ko
 https://developer.android.com/guide/topics/ui/layout/recyclerview?hl=ko
 ### promise 방식을 이용한 비동기 프로그래밍을 이용해 이미지 파이어베이스에 업로드
 https://stackoverflow.com/questions/61610024/how-to-upload-an-image-to-firebase-storage-using-kotlin-in-android-q 참고
+<pre><code>
+fun contentUpload() {
+        //make filename
+
+        var timestamp = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        var imageFileName = "Image_" + timestamp + "_.png"
+
+        var storageRef = storage?.reference?.child("images")?.child(imageFileName)
+
+        storageRef?.putFile(photoUri!!)?.continueWithTask { task: Task<UploadTask.TaskSnapshot> ->
+            return@continueWithTask storageRef.downloadUrl
+        }?.addOnSuccessListener { uri ->
+            var commentDTO = ContentDTO.Comment()
+
+            //Insert downloadUri of image
+            commentDTO.imageUri = uri.toString()
+
+            //Insert uid of user
+            commentDTO.uid = auth?.currentUser?.uid
+
+            //Insert userId
+            commentDTO.userId = auth?.currentUser?.email
+
+            //Insert explain of content
+
+            //Insert timestamp
+            commentDTO.timestamp = System.currentTimeMillis()
+
+            firestore?.collection("comment_images")?.document()?.set(commentDTO)
+
+            setResult(Activity.RESULT_OK)
+
+            finish()
+        }
+    }
+    </code></pre>
+
 ### 후에 코루틴 방식으로 변경
 https://developer.android.com/kotlin/coroutines?hl=ko
 
