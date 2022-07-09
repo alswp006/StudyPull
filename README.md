@@ -89,4 +89,69 @@ fun contentUpload(): Task<Uri> {
         }
         return storageRef!!.downloadUrl
     }
-    </code></pre>
+    </code></pre>.   
+### Glide 를 이용하여 이미지를 받아와서 피드에 표현
+<pre><code>
+override fun onBindViewHolder(p0: RecyclerView.ViewHolder, p1: Int) {
+            var viewholder = (p0 as CustomViewHolder).itemView
+
+            //UserId
+            viewholder.findViewById<TextView>(R.id.detailviewitem_profile_textview).text =
+                contentDTOs!![p1].userId
+
+            //Image
+            Glide.with(p0.itemView.context).load(contentDTOs!![p1].imageUri)
+                .into(viewholder.findViewById<ImageView>(R.id.detailviewitem_imageview_content))
+
+            //Explain of context
+            viewholder.findViewById<TextView>(R.id.detailviewitem_explain_textview).text =
+                contentDTOs!![p1].explain
+
+            //likes
+            viewholder.findViewById<TextView>(R.id.detailviewitem_favoritecounter_textview).text =
+                "Likes " + contentDTOs!![p1].favoriteCount
+
+            //ProfileImage
+            firestore?.collection("profileImages")?.document(uid!!)?.addSnapshotListener { documentSnapshot, firebaseFirestoreException ->
+                if(documentSnapshot == null) return@addSnapshotListener
+                if(documentSnapshot.data != null) {
+
+                    var url = documentSnapshot?.data!!["image"]
+                    Glide.with(activity!!).load(url).apply(RequestOptions().circleCrop()).into(viewholder.findViewById<ImageView>(R.id.detailviewitem_profile_image))
+                }
+            }
+
+            //This code is when button is clicked
+            viewholder.findViewById<ImageView>(R.id.detailviewitem_favorite_imageview)
+                .setOnClickListener {
+                    favoriteEvent(p1)
+                }
+
+            //This code is when the page is loaded
+            if (contentDTOs[p1].favorites.containsKey(uid)) {
+                //This is like status
+                viewholder.findViewById<ImageView>(R.id.detailviewitem_favorite_imageview)
+                    .setImageResource(R.drawable.ic_favorite)
+            } else {
+                //This is unlike status
+                viewholder.findViewById<ImageView>(R.id.detailviewitem_favorite_imageview)
+                    .setImageResource(R.drawable.ic_favorite_border)
+            }
+
+            viewholder.findViewById<ImageView>(R.id.detailviewitem_profile_image).setOnClickListener {
+                var fragment = UserFragment()
+                var bundle = Bundle()
+                bundle.putString("destinationUid",contentDTOs[p1].uid)
+                bundle.putString("destinationUid",contentDTOs[p1].userId)
+                fragment.arguments = bundle
+                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_content,fragment)?.commit()
+            }
+            viewholder.findViewById<ImageView>(R.id.detailviewitem_comment_imageview).setOnClickListener { v ->
+                var intent = Intent(v.context,CommentActivity::class.java)
+                intent.putExtra("contentUid",contentUidList[p1])
+                intent.putExtra("destinationUid",contentDTOs[p1].uid)
+                startActivity(intent)
+            }
+
+        }
+        </code></pre>
