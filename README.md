@@ -49,7 +49,8 @@ fun contentUpload() {
     </code></pre>
 
 ### 후에 코루틴 방식으로 변경
-https://developer.android.com/kotlin/coroutines?hl=ko
+https://developer.android.com/kotlin/coroutines?hl=ko.  
+https://firebase.google.com/docs/reference/android/com/google/firebase/storage/UploadTask.TaskSnapshot
 
 <pre><code>	
 fun contentUpload(): Task<Uri> {
