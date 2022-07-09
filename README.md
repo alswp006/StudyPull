@@ -6,5 +6,5 @@ SNS for stududent
 ![meeting1](https://user-images.githubusercontent.com/99385873/178091513-ae76d01f-c75d-4e05-942c-8b907a3003d8.png)
 ## 사용한 기술스택
 firebaseAuth를 이용한 구글 연동 이메일 로그인 기능 구현
-recyclerView https://developer.android.com/guide/topics/ui/layout/recyclerview?hl=ko 참고\n
-promise 방식을 이용한 비동기 프로그래밍 https://stackoverflow.com/questions/61610024/how-to-upload-an-image-to-firebase-storage-using-kotlin-in-android-q 참고\n
+recyclerView https://developer.android.com/guide/topics/ui/layout/recyclerview?hl=ko 참고. 
+promise 방식을 이용한 비동기 프로그래밍 https://stackoverflow.com/questions/61610024/how-to-upload-an-image-to-firebase-storage-using-kotlin-in-android-q 참고. 
