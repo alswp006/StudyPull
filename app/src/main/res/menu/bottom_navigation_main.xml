@@ -7,19 +7,19 @@
         android:title="@string/home"/>
     <item
         android:id="@+id/action_serch"
-        android:icon="@drawable/ic_search"
+        android:icon="@drawable/ic_friend"
         android:enabled="true"
-        android:title="@string/search"/>
+        android:title="friend"/>
     <item
         android:id="@+id/action_add_photo"
-        android:icon="@drawable/ic_add_a_photo"
+        android:icon="@drawable/ic_feed"
         android:enabled="true"
         android:title="@string/upload_image"/>
     <item
         android:id="@+id/action_favorite_alarm"
-        android:icon="@drawable/ic_favorite_border"
+        android:icon="@drawable/ic_alarm"
         android:enabled="true"
-        android:title="@string/favorite"/>
+        android:title="alarm"/>
     <item
         android:id="@+id/action_account"
         android:icon="@drawable/ic_account"

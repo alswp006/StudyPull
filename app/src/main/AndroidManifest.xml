@@ -19,6 +19,9 @@
             android:name=".navigation.AddPhotoActivity"
             android:exported="false" />
         <activity
+            android:name=".navigation.AddCommentPhotoActivity"
+            android:exported="false" />
+        <activity
             android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>

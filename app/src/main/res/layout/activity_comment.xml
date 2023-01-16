@@ -1,49 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout
+    android:background="@color/white"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".navigation.CommentActivity">
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/my_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="35dp">
+        android:layout_width="150dp"
+        android:layout_height="50dp">
+
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="140dp"
             android:layout_height="match_parent"
-            android:src="@drawable/studyfull_textlogo"/>
+            android:layout_marginStart="0dp"
+            android:src="@drawable/studypool_toollogo" />
     </androidx.appcompat.widget.Toolbar>
+
     <LinearLayout
+        android:id="@+id/toolbar_division"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:orientation="horizontal"
-        android:id="@+id/toolbar_division"
         android:layout_below="@+id/my_toolbar"
-        android:background="@color/colorDivision"></LinearLayout>
+        android:background="@color/colorDivision"
+        android:orientation="horizontal"></LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/comment_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="30dp"
         android:layout_below="@+id/toolbar_division"
-        android:id="@+id/comment_recyclerview"></androidx.recyclerview.widget.RecyclerView>
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="30dp"></androidx.recyclerview.widget.RecyclerView>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/comment_btn_send"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_height="40dp"
         android:layout_below="@+id/comment_recyclerview"
-        android:layout_margin="10dp"
-        android:text="@string/send"/>
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/btn_corner"
+        android:backgroundTint="#B7DEFF"
+        android:text="게시"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/comment_btn_setimage"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_below="@+id/comment_recyclerview"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/btn_corner"
+        android:backgroundTint="#B7DEFF"
+        android:text="사진"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
     <EditText
+        android:id="@+id/comment_edit_message"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_height="40dp"
         android:layout_below="@id/comment_recyclerview"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="10dp"
         android:layout_toLeftOf="@id/comment_btn_send"
-        android:id="@+id/comment_edit_message"/>
+        android:layout_toRightOf="@id/comment_btn_setimage"
+        android:background="@drawable/btn_corner"
+        android:backgroundTint="@color/colorLightGray"
+        android:hint="  댓글 달기..."
+        android:textColorHighlight="#90CAF9"
+        android:textColorLink="#000000"
+        android:textSize="12sp"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

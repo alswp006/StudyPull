@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageView
@@ -83,7 +84,10 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
     }
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         var nav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
@@ -93,6 +97,13 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         //Set default
         findViewById<BottomNavigationView>(R.id.bottom_navigation).selectedItemId = R.id.action_home
         registerPushToken()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        FcmPush.instance.sendMessage("tqcnHnwhAXRzotT594H5n5r27Tv2","hi","bye")
+        Log.d("pushalarm","favorite")
+
     }
 
 

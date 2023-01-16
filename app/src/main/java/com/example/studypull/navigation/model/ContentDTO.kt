@@ -1,6 +1,6 @@
 package com.example.studypull.navigation.model
 
-class ContentDTO(
+data class ContentDTO(
     var explain: String? = null,
     var imageUri: String? = null,
     var uid: String? = null,
@@ -10,6 +10,7 @@ class ContentDTO(
     var favorites: MutableMap<String, Boolean> = HashMap()
 ) {
     data class Comment(
+        var imageUri: String? = null,
         var uid: String? = null,
         var userId: String? = null,
         var comment: String? = null,
